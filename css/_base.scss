@@ -1,0 +1,23 @@
+* { 
+    border: 0;
+    margin: 0;
+    padding: 0;
+}
+img {
+    max-width: 100%;
+    height: auto;
+}
+
+.clr:after, .clr:before { 
+    display:block;
+    content:"";
+    clear:both; 
+}
+
+// box-shadow
+// @include maxWidthCent($Width);
+@mixin maxWidthCent($width) {
+    max-width: $width;
+    margin-left: auto;
+    margin-right: auto;
+}

@@ -1,0 +1,69 @@
+// zamena uglov dlja starih versiy
+@function oldDeg($deg) {
+    @if $deg > 90 { @return 450 - $deg; }
+    @else { @return 90 - $deg; }
+}
+
+
+// border-radius
+// @include border-radius(10px);
+@mixin border-radius($radius) {
+    -webkit-border-radius: $radius;
+    -moz-border-radius: $radius;
+    -ms-border-radius: $radius;
+    border-radius: $radius;
+}
+
+// box-shadow
+// @include box-shadow(0px 4px 5px #666, 2px 6px 10px #999);
+@mixin box-shadow($shadows...) {
+    -webkit-box-shadow: $shadows;
+    -moz-box-shadow: $shadows;
+    box-shadow: $shadows;
+}
+// @include ebox-shadow(0px, 0px, 14px, 6px, rgba(0,0,0,0.75));
+@mixin ebox-shadow($sx, $sy, $raz, $ras, $col, $inset: null) {
+    -webkit-box-shadow: $inset $sx $sy $raz $ras $col;
+    -moz-box-shadow: $inset $sx $sy $raz $ras $col;
+    box-shadow: $inset $sx $sy $raz $ras $col;
+}
+
+// box-sizing
+// @include box-sizing(border-box);
+@mixin box-sizing($box) {
+    -moz-box-sizing: $box;
+    -webkit-box-sizing: $box;
+    box-sizing: $box;
+}
+
+// filter w-b/color (100%/0)
+// @include filterWB(100%);
+@mixin filterWB($filtr: 100%) {
+    -webkit-filter: grayscale($filtr);
+    -moz-filter: grayscale($filtr);
+    -ms-filter: grayscale($filtr);
+    -o-filter: grayscale($filtr);
+    filter: grayscale($filtr);
+    /*filter: url(grayscale.svg);*/ /* Firefox 4+ !!!v new Firefox error*/
+    @if $filtr == 0 { filter: none; /* IE 6-9 */ }
+    @else { filter: gray; /* IE 6-9 */ }
+}
+
+// linear-gradient
+// @include linear-gradient(90, #B8E09D, #f7f7f7);
+@mixin linear-gradient($deg, $col1, $col2) {
+    background: linear-gradient(#{$deg}deg, $col1, $col2);
+    background: -moz-linear-gradient(#{oldDeg($deg)}deg, $col1, $col2);
+    background: -webkit-linear-gradient(#{oldDeg($deg)}deg, $col1, $col2);
+    background: -o-linear-gradient(#{oldDeg($deg)}deg, $col1, $col2); 
+    background: -ms-linear-gradient(#{oldDeg($deg)}deg, $col1, $col2);
+    @if $deg < 45 { filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$col2}', endColorstr='#{$col1}',GradientType=0); }
+    @else if $deg < 135 { filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$col1}', endColorstr='#{$col2}',GradientType=1); }
+    @else if $deg < 225 { filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$col1}', endColorstr='#{$col2}',GradientType=0); }
+    @else if $deg < 315 { filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$col2}', endColorstr='#{$col1}',GradientType=1); }
+    @else { filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#{$col2}', endColorstr='#{$col1}',GradientType=0); }
+}
+// @include lgradient(0, #5371B3);
+@mixin lgradient($deg, $col) {
+    @include linear-gradient($deg, lighten($col, 15%), darken($col, 15%));
+}

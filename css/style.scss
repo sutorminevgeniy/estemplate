@@ -1,0 +1,153 @@
+@import "labSCSS.scss";
+@import "normalize.scss";
+@import "base.scss";
+
+$Width: 1140px;
+$Bcolor: #9dcae0;
+$BcolorPage: #fff;
+$Color: #3a3a3a;
+
+html {
+    background: url("../images/fon.png") $Bcolor 50% 0 no-repeat;
+    height: 100%;
+}
+body {
+    height: 100%;
+    color: $Color;
+    font: 100%/1.5em Arial, Helvetica, sans-serif;
+    
+    .wraiper {
+        min-height: 100%;
+        @include maxWidthCent($Width);
+        background: $BcolorPage;
+        @include box-sizing(border-box);
+        * { @include box-sizing(border-box); }
+    }
+    
+    h1, .h1 {
+        
+    }
+    h2, .h2 {
+        
+    }
+}
+
+
+/* Header */
+$headerHeight: 150px;
+header {
+    background: #B8E09D;
+    height: $headerHeight;
+    position: relative;
+
+    .headerLogo {
+        background: url("../images/logo.png") no-repeat;
+        display: block;
+        height: 100px;
+        width: 100px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+}
+
+/* Menu */
+$navHeight: 60px;
+$navBcolor: #5371B3;
+.menuTop {
+    height: $navHeight;
+    background: $navBcolor;
+    text-align: center;
+
+    ul {
+        display: inline-block;
+    }
+    li {
+        display: block;
+        border-left: 1px solid #484848;
+        float: left;
+        position: relative;
+
+        >a {
+            text-decoration: none;
+            vertical-align: middle;
+            color: #ffffff;
+            padding: 0 14px;
+            display: table-cell;
+            height: $navHeight;
+        }
+        ul {
+            background: $navBcolor;
+            display: none;
+            position: absolute;
+            left: 0;
+            top: $navHeight;
+            z-index: 10;
+
+            >li {
+                display: block;
+                border-left: none;
+
+                >a {
+                    height: $navHeight - 10px;
+                }
+            }
+        }
+
+        &:hover ul {
+            display: block;
+        }
+        &:first-child {
+            border-left: none;
+        }
+        &.active>a, 
+        &:hover>a {
+            color: #ffd800;
+        }
+    }
+}
+
+/* Middle */
+.middle {
+    
+}
+$LeftWidth: 200px;
+$RightWidth: 300px;
+.blRow {
+    overflow: hidden;
+    
+    .blLeft {
+        float: left;
+        width: $LeftWidth;
+    }
+    .blRight {
+        float: right;
+        width: $RightWidth;
+    }
+    .blLeft ~ .blCenter {
+        margin-left: $LeftWidth;
+    }
+    .blRight ~ .blCenter {
+        margin-right: $RightWidth;
+    }
+}
+
+/* Footer */
+$footerHeight: 150px;
+$footerWidth: $Width;
+footer {
+    background: #282828;
+    height: $footerHeight;
+    @include maxWidthCent($footerWidth);
+    margin-top: -$footerHeight;
+    @include box-sizing(border-box);
+    * { @include box-sizing(border-box); }
+}
+.rasporka {
+    height: $footerHeight;
+    width: 100%;
+}
+
+@media screen and (max-width: 320px) {
+    
+}
