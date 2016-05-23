@@ -474,7 +474,6 @@ footer {
   max-width: 1140px;
   margin-left: auto;
   margin-right: auto;
-  margin-top: -150px;
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
   box-sizing: border-box; }
@@ -485,6 +484,5 @@ footer {
 
 .rasporka {
   height: 150px;
+  margin-bottom: -150px;
   width: 100%; }
-
-/*# sourceMappingURL=style.css.map */

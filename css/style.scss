@@ -139,12 +139,12 @@ footer {
     background: #282828;
     height: $footerHeight;
     @include maxWidthCent($footerWidth);
-    margin-top: -$footerHeight;
     @include box-sizing(border-box);
     * { @include box-sizing(border-box); }
 }
 .rasporka {
     height: $footerHeight;
+    margin-bottom: -$footerHeight;
     width: 100%;
 }
 
