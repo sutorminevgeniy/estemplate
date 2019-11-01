@@ -2,6 +2,7 @@
 
 const gulp = require('gulp');
 const sass = require('gulp-sass');
+const pug = require('gulp-pug');
 const gulpIf = require('gulp-if'); // для выполнения задачи при соблюденнии условия (упращает запись для задач разработки)
 const gulplog = require('gulplog');
 const sourcemaps = require('gulp-sourcemaps'); // плагин для удобства разработки. В браузере показываются исходные файлы
@@ -23,14 +24,20 @@ gulp.task('clean', function() {
 });
 
 // копирование фаилов
+gulp.task('image', function() {
+  return gulp.src('src/img/**/*.*', {since: gulp.lastRun('image')}) // копирует только изменённые файлы при повторном запуске (при watch частности)
+    .pipe(gulp.dest('dist/img'));
+});
+
 gulp.task('html', function() {
   return gulp.src('src/*.html', {since: gulp.lastRun('html')}) // копирует только изменённые файлы при повторном запуске (при watch частности)
     .pipe(gulp.dest('dist'));
 });
 
-gulp.task('image', function() {
-  return gulp.src('src/img/**/*.*', {since: gulp.lastRun('image')}) // копирует только изменённые файлы при повторном запуске (при watch частности)
-    .pipe(gulp.dest('dist/img'));
+gulp.task('views', function buildHTML() {
+  return gulp.src('src/views/*.pug')
+  .pipe(pug())
+  .pipe(gulp.dest('dist'));
 });
  
 // обработка стилей
@@ -100,7 +107,7 @@ gulp.task('js', function(callback) {
 // объединнённая задача для сборки
 gulp.task('build', gulp.series( // выполняет задачи по очереди
   'clean',
-  gulp.parallel('html', 'js', 'image', 'sass')) // выполняет задачи паралельно
+  gulp.parallel('html', 'views', 'js', 'image', 'sass')) // выполняет задачи паралельно
 );
 
 // перезагрузка браузера при обнавление файлов
@@ -115,6 +122,7 @@ gulp.task('serve', function() {
 // следит за изменением файлов (смотреть сhokidar для удаления файлов)
 gulp.task('watch', function() {
   gulp.watch('src/*.html', gulp.series('html'));
+  gulp.watch('src/views/*.pug', gulp.series('views'));
   // gulp.watch('src/js/*.js', gulp.series('js'));
   gulp.watch('src/img/**/*.*', gulp.series('image'));
   gulp.watch('./src/sass/*.scss', gulp.series('sass'));
