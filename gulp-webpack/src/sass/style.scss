@@ -1,54 +1,58 @@
-@import "lib/var";
+@import "var";
 
+@import "modules/jq-slider.scss";
+
+
+* {
+	margin: 0;
+	padding: 0;
+}
+html,
 body {
-    background-color: $backgroundColor;
-    color: #000;
+	height: 100%;
+}
+html {
+    background: url("../img/fon.png") $bgColorFon 50% 0 no-repeat;
+    height: 100%;
+}
+body {
+    max-width: $width;
     padding: 0;
     margin: 0;
+    margin: 0 auto;
+    background-color: $bgColorPage;
+    color: $color;
+}
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	min-height: 100%;
 }
 
-#slider-land {
-    height: 400px;
+.header {
+    flex: 0 0 auto;
+    background: $bgColorHeader;
+    height: $heightHeader;
     position: relative;
-    overflow: hidden;
-    background-color: pink;
-}
-.sl-content {
-    >div {
+
+    .headerLogo {
+        background: url("../img/logo.png") no-repeat;
+        display: block;
+        height: 100px;
+        width: 100px;
         position: absolute;
-        top: 0; bottom: 0;
-        left: 0; right: 0;
+        top: 0;
+        left: 0;
     }
 }
-.sl-control {
-    text-align: center;
-    position: absolute;
-    bottom: 34px;
-    left: 0; right: 0;
 
-    div {
-        cursor: pointer;
-        display: inline-block;
-        width: 10px; height: 10px;
-        border: 2px solid #ffffff;
-        border-radius: 6px;
-    }
+.content {
+	flex: 1 0 auto;
+}
 
-    .active {
-        background: #ffffff;
-    }
-}
-.butsl {
-    cursor: pointer;
-    width: 19px; height: 32px;
-    position: absolute;
-    top: 50%;
-}
-#sl-left {
-    background: url('../img/left-ldp2.png');
-    left: 110px;
-}
-#sl-right {
-    background: url('../img/right-ldp2.png');
-    right: 110px;
+.footer {
+    flex: 0 0 auto;
+    height: $heightFooter;
+    background: $bgColorFooter;
+    color: $colorFooter;
 }

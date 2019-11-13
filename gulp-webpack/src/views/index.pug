@@ -1,16 +1,15 @@
-doctype html
-html(lang="en")
-  head
-    title= pageTitle
-    script(type='text/javascript').
-      if (foo) bar(1 + 5)
-  body
-    h1 Pug - node template engine
-    #container.col
-      if youAreUsingPug
-        p You are amazing
-      else
-        p Get on it!
-      p.
-        Pug is a terse and simple templating language with a
-        strong focus on performance and powerful features.
+extends layouts/layout.pug
+block variables
+  - var title = 'Home page'
+
+block append head
+  script(src='/js/main.js')
+
+block header
+  a.headerLogo(href='/')
+
+block content
+  h1= title
+  p Pug is a terse and simple templating language with a strong focus on performance and powerful features.
+  
+  include modules/jq-slider.pug

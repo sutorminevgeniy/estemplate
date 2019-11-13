@@ -30,7 +30,7 @@ gulp.task('image', function() {
 });
 
 gulp.task('html', function() {
-  return gulp.src('src/*.html', {since: gulp.lastRun('html')}) // копирует только изменённые файлы при повторном запуске (при watch частности)
+  return gulp.src('src/views/*.html', {since: gulp.lastRun('html')}) // копирует только изменённые файлы при повторном запуске (при watch частности)
     .pipe(gulp.dest('dist'));
 });
 
@@ -121,11 +121,11 @@ gulp.task('serve', function() {
 
 // следит за изменением файлов (смотреть сhokidar для удаления файлов)
 gulp.task('watch', function() {
-  gulp.watch('src/*.html', gulp.series('html'));
-  gulp.watch('src/views/*.pug', gulp.series('views'));
+  gulp.watch('src/views/**/*.html', gulp.series('html'));
+  gulp.watch('src/views/**/*.pug', gulp.series('views'));
   // gulp.watch('src/js/*.js', gulp.series('js'));
   gulp.watch('src/img/**/*.*', gulp.series('image'));
-  gulp.watch('./src/sass/*.scss', gulp.series('sass'));
+  gulp.watch('./src/sass/**/*.scss', gulp.series('sass'));
 });
 
 // объединнённая задача для разработки
